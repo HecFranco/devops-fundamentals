@@ -3,11 +3,14 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
 
+const basePath = __dirname;
+
 module.exports = {
+  context: path.join(basePath,  'src'),
   entry: {
-    app: "./students.js",
+    app: "./index.js",
     appStyles: ["./mystyles.scss"],
-    vendorStyles: ["./node_modules/bootstrap/dist/css/bootstrap.css"],
+    vendorStyles: ["../node_modules/bootstrap/dist/css/bootstrap.css"],
   },
   output: {
     filename: "[name].[chunkhash].js",
