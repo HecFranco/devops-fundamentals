@@ -6,7 +6,7 @@ const path = require("path");
 module.exports = {
   entry: {
     app: "./students.js",
-    appStyles: ["./mystyles.css"],
+    appStyles: ["./mystyles.scss"],
     vendorStyles: ["./node_modules/bootstrap/dist/css/bootstrap.css"],
   },
   output: {
@@ -19,6 +19,20 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: "babel-loader",
+      },
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              implementation: require("sass"),
+            },
+          },
+        ],
       },
       {
         test: /\.css$/,
