@@ -6,7 +6,7 @@ const path = require("path");
 const basePath = __dirname;
 
 module.exports = {
-  context: path.join(basePath,  'src'),
+  context: path.join(basePath, "src"),
   entry: {
     app: "./index.js",
     appStyles: ["./mystyles.scss"],
@@ -40,6 +40,10 @@ module.exports = {
       {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
+      },
+      {
+        test: /\.(png|jpg)$/,
+        type: "asset/resource",
       },
     ],
   },
