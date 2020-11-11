@@ -102,4 +102,74 @@ $ echo $var
 123
 ```
 
-El alacnace de esta variable es sólo para esta sesión. Esta varaiable será visible por cualquier script que sea ejecutado en este contexti. Vamos a crear un nuevo script __script_a.sh__. 
+El alacnace de esta variable es sólo para esta sesión. Esta variable será visible por cualquier script que sea ejecutado en este contexto. Vamos a crear un nuevo script __script_a.sh__, con el siguiente contenido.
+
+```bash
+echo $var
+```
+
+Le damos permisos
+
+```bash
+chmod +x script_a.sh
+```
+
+Si lo ejecutamos nos devuelve un espacio en blanco `undefined`.
+
+```bash
+./script_a.sh
+
+```
+
+Para hacer que la variable sea visible por un proceso hijo, la necesitamos exportar.
+
+```bash
+$ export var
+$ ./script_a.sh
+123
+```
+
+Podemos quitar la variable usando `unset`.
+
+```bash
+$ unset var
+$ ./script_a.sh 
+
+```
+
+* __bash__ establece muchas variables globales que podemos listar con el comando _env_.
+
+```bash
+$ env
+TERM_PROGRAM=vscode
+NVM_CD_FLAGS=
+TERM=xterm-256color
+SHELL=/bin/bash
+TMPDIR=/var/folders/zh/ckdw3m6x57xdqqwfqnf2jdlc0000gn/T/
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.u7Q6ms8zC1/Render
+TERM_PROGRAM_VERSION=1.37.1
+NVM_DIR=/Users/jaimesalaszancada/.nvm
+USER=jaimesalaszancada
+COMMAND_MODE=unix2003
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.pjIvbru0ZB/Listeners
+__CF_USER_TEXT_ENCODING=0x1F5:0:2
+PATH=/Users/jaimesalaszancada/.nvm/versions/node/v10.16.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/jaimesa
+laszancada/.nvm/versions/node/v10.16.0/bin
+PWD=/Users/jaimesalaszancada/Documents/paths/bash-path/00_fundamentals
+LANG=en_GB.UTF-8
+XPC_FLAGS=0x0
+XPC_SERVICE_NAME=0
+SHLVL=2
+HOME=/Users/jaimesalaszancada
+LOGNAME=jaimesalaszancada
+NVM_BIN=/Users/jaimesalaszancada/.nvm/versions/node/v10.16.0/bin
+COLORTERM=truecolor
+_=/usr/bin/env
+```
+
+Para referenciar una variable global es exactamente lo mismo que cualquier otra variable.
+
+```bash
+$ echo $USER
+jaimesalaszancada
+```
