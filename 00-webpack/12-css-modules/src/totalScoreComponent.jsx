@@ -1,5 +1,6 @@
 import React from "react";
 import { getTotalScore } from "./averageService";
+import classes from './totalScoreComponentStyles.scss';
 
 export const TotalScoreComponent = () => {
   const [totalScore, setTotalScore] = React.useState(0);
@@ -11,7 +12,7 @@ export const TotalScoreComponent = () => {
 
   return (
     <div>
-      <span className="result-background">
+      <span className={classes.resultBackground}>
         Students total score: {totalScore}
       </span>
     </div>
