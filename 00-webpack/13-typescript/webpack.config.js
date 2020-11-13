@@ -8,10 +8,10 @@ const basePath = __dirname;
 module.exports = {
   context: path.join(basePath, "src"),
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: [".js", ".ts", ".tsx"],
   },
   entry: {
-    app: "./index.jsx",
+    app: "./index.tsx",
     appStyles: ["./mystyles.scss"],
     vendorStyles: ["../node_modules/bootstrap/dist/css/bootstrap.css"],
   },
@@ -23,7 +23,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
         loader: "babel-loader",
       },
@@ -37,9 +37,9 @@ module.exports = {
             options: {
               modules: {
                 exportLocalsConvention: "camelCase",
-                localIdentName: '[path][name]__[local]--[hash:base64:5]',
-                localIdentContext: path.resolve(__dirname, 'src'),
-                localIdentHashPrefix: 'my-custom-hash',
+                localIdentName: "[path][name]__[local]--[hash:base64:5]",
+                localIdentContext: path.resolve(__dirname, "src"),
+                localIdentHashPrefix: "my-custom-hash",
               },
             },
           },
@@ -65,8 +65,10 @@ module.exports = {
       },
     ],
   },
+  devtool: 'eval-source-map',
   devServer: {
     port: 8080,
+    stats: "errors-only",
   },
   plugins: [
     //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
