@@ -10,6 +10,25 @@ module.exports = merge(common, {
     filename: "js/[name].[chunkhash].js",
     assetModuleFilename: "images/[hash][ext][query]",
   },
+  optimization: {
+    runtimeChunk: "single",
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          chunks: "all",
+          name: (module) => {
+            const packageName = module.context.match(
+              /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+            )[1];
+            // npm package names are URL-safe, but some servers don't like @ symbols
+            return `vendor/${packageName.replace("@", "")}`;
+          },
+          test: /[\\/]node_modules[\\/]/,
+          enforce: true,
+        },
+      },
+    },
+  },
   module: {
     rules: [
       {
