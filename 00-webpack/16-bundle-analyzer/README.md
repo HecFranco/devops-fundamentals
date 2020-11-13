@@ -131,8 +131,6 @@ _webpack.prod.js_
 > [Webpack SplitChunks](https://webpack.js.org/plugins/split-chunks-plugin/#optimizationsplitchunks)
 >
 > https://medium.com/hackernoon/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
->
-> https://survivejs.com/webpack/building/bundle-splitting/
 
 # About Basefactor + Lemoncode
 
