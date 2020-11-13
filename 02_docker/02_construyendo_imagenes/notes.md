@@ -19,7 +19,8 @@ Nuestro `package.json` debería verse una cosa como esta:
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
   },
   "keywords": [],
   "author": "",
