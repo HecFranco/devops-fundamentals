@@ -103,7 +103,9 @@ dist
 # TernJS port file
 .tern-port
 
-.vagrant/
+# python
+__pycache__/
 
 # Helpers
+.vagrant/
 todo
