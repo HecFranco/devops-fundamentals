@@ -52,6 +52,24 @@ Editar `package.json`
 
 ```
 
+Crear el `Dockerfile` para la aplicación de `node`
+
+```Dockerfile
+FROM node:alpine
+
+WORKDIR /opt/app
+
+COPY index.js .
+COPY package.json .
+
+RUN npm install --only=production
+
+EXPOSE 8080
+
+CMD [ "npm", "start" ]
+```
+
+
 Ahora vamos a crear el código del balanceador de carga
 
 Crear `nginx/nginx.conf`
@@ -85,9 +103,12 @@ http {
 Crear `nginx/Dockerfile`
 
 ```Dockerfile
+FROM nginx
+
+ADD ./nginx.conf /etc/nginx
 ```
 
-First we have to create a new network
+Primero creamos una nueva red.
 
 ```bash
 $ docker network create --driver=bridge \
@@ -95,56 +116,64 @@ $ docker network create --driver=bridge \
 --ip-range=172.100.1.2/25 mybridge
 ```
 
-With this on place we can run multiple containers on this _network_
+Generamos una nueva build de myapp
 
 ```bash
-$ docker run -d --rm --net=mybridge --name myapp1 myapp
-$ docker run -d --rm --net=mybridge --name myapp2 myapp
-$ docker run -d --rm --net=mybridge --name myapp3 myapp
+$ docker build -t myapp .
 ```
 
-Now we're going to create a new _nginx.conf_
+Ahora vamos a ejecutar múltiples contenedores en la _network_
 
+```bash
+$ docker run -d --rm --net=mybridge -e INSTANCE=myapp1 --name myapp1 myapp
+$ docker run -d --rm --net=mybridge -e INSTANCE=myapp2 --name myapp2 myapp
+$ docker run -d --rm --net=mybridge -e INSTANCE=myapp3 --name myapp3 myapp
 ```
-user root;
-error_log /var/log/nginx/error.log;
-pid /var/run/nginx.pid;
-events {
-    worker_connections 1024;
-    use epoll;
-}
-http {
-    upstream nodeapp {
-        server myapp1:8080;
-        server myapp2:8080;
-        server myapp3:8080;
-    }
-    server {
-        server_name localhost;
-        listen 80;
-        error_log  /var/log/nginx/errorhttp.log;
-        access_log /var/log/nginx/accesshttp.log;
-        location / {
-            proxy_pass http://nodeapp;
+
+Si inspeccionamos la red `mybridge`
+
+```bash
+$ docker network inspect mybridge
+...
+"Containers": {
+            "1981383f2b468348cbb0430f61e9603f2601bf9140c8394c27b6774130a4eb8e": {
+                "Name": "myapp1",
+                "EndpointID": "9a9da87bf1d261f7685108dba565a2f36eff14cab66a2c08c0376a46ade33ba8",
+                "MacAddress": "02:42:ac:64:01:02",
+                "IPv4Address": "172.100.1.2/24",
+                "IPv6Address": ""
+            },
+            "aee2591917905359c6a799ee66537e67561f133986512854a5715adb53e4e018": {
+                "Name": "myapp2",
+                "EndpointID": "6df1ce35a2c6381bb408fd25e644bac27bcd6a73c43a32c0bf8cbc3f27f39479",
+                "MacAddress": "02:42:ac:64:01:03",
+                "IPv4Address": "172.100.1.3/24",
+                "IPv6Address": ""
+            },
+            "b6eb7b3c96a99f999b4ecc2f73e2c45ef383de5a202051fbdbe1d5bd81fe0039": {
+                "Name": "myapp3",
+                "EndpointID": "9eae97b378e7e7b8c1e0866f2654aa2eb768303e6313e4edb431043a11d25b20",
+                "MacAddress": "02:42:ac:64:01:04",
+                "IPv4Address": "172.100.1.4/24",
+                "IPv6Address": ""
+            }
         }
-    }
-}
 ```
 
-Create the image for our load balancer
+Creamos la imagen del load balancer, desde el directorio `nginx`
 
 ```bash
 docker build -t myloadbalancer .
 ```
 
-Now we can run the load balancer in the same network and pport forward por 80
+Ahora podemos ejecutar el `load balancer` en la misma `network` y mapeando al puerto 80.
 
 ```bash
 $ docker run -d --rm --net=mybridge -p 80:80 \
 --name mylb myloadbalancer
 ```
 
-If we inspect the network, we must see the related containers
+Si volvemos a inspeccionar la red deberíamos de ver el contenedor `mylb`
 
 ```bash
 $ docker network inspect mybridge
@@ -213,7 +242,7 @@ $ docker network inspect mybridge
 ]
 ```
 
-We can realize that there's now service discovery inside the network
+Podemos comprobar que ahora existe `service discovery` dentro de la `network`
 
 ```bash
 $ docker exec mylb cat /etc/resolv.conf
