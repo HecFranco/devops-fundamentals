@@ -40,10 +40,11 @@ pipeline {
     stages {
         stage('Build e2e runner') {
             steps {
-                dir("$WORKSPACE/06_declarative_pipelines_e2e/02_running_e2e_with_docker/front") {
-                    script {
-                        image = docker.build("jaimesalas/e2e", "--pull -f ./front/Dockerfile.e2e ./front")
-                    }
+                script {
+                    image = docker.build(
+                        "jaimesalas/e2e", 
+                        "--pull -f $WORKSPACE/06_declarative_pipelines_e2e/02_running_e2e_with_docker/front/Dockerfile.e2e $WORKSPACE/06_declarative_pipelines_e2e/02_running_e2e_with_docker/front"
+                        )
                 }
             }
         }
@@ -56,4 +57,14 @@ pipeline {
         }
     }
 }
+```
+
+Because we have a complicated structure of demos, the above paths are a little hard to follow, developing the example alone the path is easier
+
+```groovy
+/*diff*/
+script {
+    image = docker.build("jaimesalas/e2e", "--pull -f ./front/Dockerfile.e2e ./front")
+}
+/*diff*/
 ```
