@@ -21,3 +21,4 @@ docker container run --name jenkins-blueocean --rm --detach \
 # To run the script from root directory
 # $ ./start_jenkins_custom.sh jenkins/nodedotnet:latest jenkins-docker-certs-node-dotnetcore jenkins-docker-node-dotnetcore
 # $ ./start_jenkins_custom.sh jenkins/node-dotnet-compose:latest jenkins-docker-certs-ndc jenkins-docker-ndc
+# $ ./start_jenkins.sh jaimesalas/jenkins jenkins-review-certs jenkins-review
