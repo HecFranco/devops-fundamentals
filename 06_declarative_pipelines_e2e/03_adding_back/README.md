@@ -253,7 +253,3 @@ $ docker build -t jaimesalas/e2e -f ./front/Dockerfile.e2e ./front
 ```bash
 $ docker run --rm -e API_URL=http://e2e-back:4000 --network e2e jaimesalas/e2e npm run test:e2e
 ```
-
-
-> Continue with: https://github.com/JaimeSalas/jenkins_e2e_poc/tree/jenkins-cypress-ci-e2e
-> Reference for Jenkinsfile: https://github.com/Lemoncode/devops-fundamentals/tree/feature/declarative-pipeline-e2e
