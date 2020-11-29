@@ -79,7 +79,7 @@ docker kill <container id or name>
 
 > https://superuser.com/questions/756999/whats-the-difference-between-docker-stop-and-docker-kill
 
-_stop_ intenta un apagado agraciado lanzando la señal `SIGTERM`, mientras que _kill_ simplemente mata el procesa por defecto y admás permite enviar otras señales
+_stop_ intenta un apagado agraciado lanzando la señal `SIGTERM`, mientras que _kill_ simplemente mata el procesa por defecto y además permite enviar otras señales
 
 ### Start / Restart Contenedores
 

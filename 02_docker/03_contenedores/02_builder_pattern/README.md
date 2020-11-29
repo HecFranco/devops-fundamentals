@@ -46,8 +46,6 @@ $ docker run -p 8080:8080 mygoapp
 google localhost:8080/other/and/787
 ```
 
-
-
 Si comprobamos el pesoo de la imagen:
 
 ```

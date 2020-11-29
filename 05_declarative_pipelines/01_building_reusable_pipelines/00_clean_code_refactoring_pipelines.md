@@ -106,7 +106,7 @@ This stage enumerates all the tools and versions related with the build.
 ```groovy
 stage('Unit Test') {
     steps {
-        dir('./m3/src') {
+        dir('./01/src') {
             sh '''
                 dotnet test --logger "trx;LogFileName=Pi.Math.trx" Pi.Math.Tests/Pi.Math.Tests.csproj
                 dotnet test --logger "trx;LogFileName=Pi.Runtime.trx" Pi.Runtime.Tests/Pi.Runtime.Tests.csproj
@@ -122,7 +122,7 @@ With `dir` we change the directory. Then we run the related unit tests, and also
 ```groovy
 stage('Smoke Test') {
     steps {
-        sh 'dotnet ./m3/src/Pi.Web/bin/Debug/netcoreapp3.1/Pi.Web.dll'
+        sh 'dotnet ./01/src/Pi.Web/bin/Debug/netcoreapp3.1/Pi.Web.dll'
     }
 }
 ```
@@ -169,7 +169,7 @@ pipeline {
         }
         stage('Unit Test') {
             steps {
-                dir('./m3/src') {
+                dir('./01/src') {
                     sh '''
                         dotnet test --logger "trx;LogFileName=Pi.Math.trx" Pi.Math.Tests/Pi.Math.Tests.csproj
                         dotnet test --logger "trx;LogFileName=Pi.Runtime.trx" Pi.Runtime.Tests/Pi.Runtime.Tests.csproj
@@ -188,7 +188,7 @@ pipeline {
                 expression { return params.RC }
             }
             steps {
-                sh 'dotnet publish -p:VersionPrefix="${VERSION}" --version-suffix "${VERSION_RC}" ./m3/src/Pi.Web/Pi.Web.csproj -o ./out'
+                sh 'dotnet publish -p:VersionPrefix="${VERSION}" --version-suffix "${VERSION_RC}" ./01/src/Pi.Web/Pi.Web.csproj -o ./out'
                 archiveArtifacts('out/')
             }
         }

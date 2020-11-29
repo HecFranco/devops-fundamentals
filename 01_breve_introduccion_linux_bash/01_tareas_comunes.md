@@ -50,7 +50,7 @@ drwxr-xr-x  15 jaimesalaszancada  staff    480 Jul 28 19:48 .git
 
 The __.__ stands for the current working directory, and the __..__ stands for the parent directory of the current folder that you're in. These are special folders that the operating system and the filesystem sets up.
 
-El `.` representa el directorio de trabajo actual, y `..` representa el directorio padre del directori actual en el que nos encontarmos. Estos son directorios especiales que el sistema operativo y sistema de ficheros establece.
+El `.` representa el directorio de trabajo actual, y `..` representa el directorio padre del directorio actual en el que nos encontarmos. Estos son directorios especiales que el sistema operativo y sistema de ficheros establece.
 
 Si hacemos `cd ..`, movemos el directorio actual a un nivel superior en la jerarquía de ficheros.
 

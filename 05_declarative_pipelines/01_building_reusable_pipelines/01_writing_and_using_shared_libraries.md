@@ -202,7 +202,7 @@ pipeline {
                 expression { return params.RC }
             }
             steps {
-                sh 'dotnet publish -p:VersionPrefix="${VERSION}" --version-suffix "${VERSION_RC}" ./m3/src/Pi.Web/Pi.Web.csproj -o ./out'
+                sh 'dotnet publish -p:VersionPrefix="${VERSION}" --version-suffix "${VERSION_RC}" ./01/src/Pi.Web/Pi.Web.csproj -o ./out'
                 archiveArtifacts('out/')
             }
         }
