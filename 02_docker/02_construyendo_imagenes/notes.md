@@ -7,7 +7,7 @@ $ npm init -y
 ```
 
 ```bash
-$ npm i express -S
+$ npm i express
 ```
 
 Nuestro `package.json` debería verse una cosa como esta:

@@ -1,25 +1,24 @@
 ## Volumes
 
-Volumes are mechanisms to persist data out of the running container, separating the life cycle of the container from the data.
+Los `Volumes` son mecanismos para persistir el `data` fuera de un `running container`, separando el ciclo de vida del contenedor del `data`.
 
-While bind mounts are dependent on the directory structure and OS of the host machine, __volumes are completely managed by Docker__. Volumes have several advantages over bind mounts:
+Mientras `bind mounts` son dependientes de la estructura de directorios y OS del `host`, __los volumes son completamnete gestionados por Docker__. Los `volumes` tienen las siguientes ventajas frente a `bind mounts`:
 
-* Volumes are easier to back up or migrate than bind mounts.
-* You can manage volumes using Docker CLI commands or the Docker API.
-* Volumes work on both Linux and Windows containers.
-* Volumes can be more safely shared among multiple containers.
-* Volume drivers let you store volumes on remote hosts or cloud providers, to encrypt the contents of volumes, or to add other functionality.
-* New volumes can have their content pre-populated by a container.
-* Volumes on Docker Desktop have much higher performance than bind mounts from Mac and Windows hosts.
+* Con los `volumes` es más fácil hacer back up o migrar que con `bind mounts`
+* Los `volumes` se pueden gestionar a través de `Docker CLI` o la `Docker API`
+* Los `volumes` funcionan tanto en Linux como en Windows.
+* Los `volumes` pueden ser compartidos de manera más segura entre múltiples contenedores.
+* Los `volume drivers` permite almacenamiento en hosts remotos o proveedores de cloud, para encriptar el contenido de un volumen, o añadir otras funcionalidades.
+* Los nuevos volumenes pueden ser inicializados por un contenedor. 
+* Los `volumes` en `Docker Desktop` tienen mucha mejor performance que `bind mounts`, tanto en Mac como en Windows.
 
-Volumes are often a better choice than persisting data in a container’s writable layer, because a volume does not increase the size of the containers using it, and the volume’s contents exist outside the lifecycle of a given container.
+Los `volumes` suelen ser una mejor opción que persistir el `data` en la capa de escritura de un contenedor, porque sl volumen no aumenta el tamaño del contenedor que lo usa, y el conetnido del volumen esta fuera del ciclo de vida del contenedor.
 
 ### Choose the -v or --mount flag
 
-In general, `--mount` is more explicit and verbose. The biggest difference is that the `-v` syntax combines all the options together in one field, while the `--mount` syntax separates them. Here is a comparison of the syntax for each flag.
+En general, `--mount` es más explicito y verboso. La gran diferenca es que la sintaxis `-v` combina todas las opciones en un solo campo, mientras que `--mount` las separa. Veamos una compartiva de ambas sintaxis.
 
-To specify volume driver options, you must use `--mount`
-
+Para especificar las opciones de `volume driver`, se debe usar `--mount`
 
 * `-v` or `--volume`: Consists of three fields, separated by colon characters (:). The fields must be in the correct order, and the meaning of each field is not immediately obvious.
     - In the case of named volumes, the first field is the name of the volume, and is unique on a given host machine. For anonymous volumes, the first field is omitted.
@@ -35,7 +34,7 @@ The volume-opt option, which can be specified more than once, takes a key-value 
 
 ### Differences between -v and --mount behavior
 
-As opposed to bind mounts, all options for volumes are available for both `--mount` and `-v` flags.
+Al contrario de `bind mounts`, todas las opciones de `volume` están disponibles en ambos flags `--mount` y `-v`.
 
 ## Create and manage volumes
 
@@ -76,7 +75,7 @@ $ docker volume rm test-vol
 
 ## Start a container with a volume
 
-If you start a container with a volume that does not yet exist, Docker creates the volume for you.
+Si arranacas un contenedor con un `volume` que todavía no existe, `Docker` crea el `volume` por ti.
 
 ```bash
 # mount syntax
@@ -112,9 +111,9 @@ $ docker inspect mynginx
 
 ## Populate a volume using a container
 
-If you start a container which creates a new volume, and the container has files or directories in the directory to be mounted, the directory’s contents are copied into the volume. The container then mounts and uses the volume, and other containers which use the volume also have access to the pre-populated content.
+Si arrancas un contenedor el cual crea un nuevo `volume`, y el contenedor tiene ficheros o directorios en el directorio que es `mount point`, el contenido del directorio es copiado al `volume`. El contenedor después monta (mounts) y usa el `volume`, y otros contenedores, los cuales usen el `volume` también tienen acceso al contenido `pre cargado`.
 
-For example, we can do this:
+Por ejemplo, podemos hacer esto:
 
 ```bash
 # mount
@@ -132,7 +131,7 @@ $ docker run -d \
   nginx:latest
 ```
 
-Now that we have a container that populates a volume, let's check that we have access from other container
+Ahora que tenemos un contenedor que carga un `volume`, vamos a comprobar que tenemos acceso desde otro contenedor
 
 ```bash
 $ docker run -v nginx-vol:/usr -it busybox
@@ -150,7 +149,7 @@ bin   dev   etc   home  proc  root  sys   tmp   usr   var
 
 ## Use a read-only volume
 
-For some development applications, the container needs to write into the bind mount so that changes are propagated back to the Docker host. At other times, the container only needs read access to the data. Remember that multiple containers can mount the same volume, and it can be mounted read-write for some of them and read-only for others, at the same time.
+Para el desarrollo de algunas aplicacione, el contenedor necesita escribir en el `bind mount` para que los cambios sean propagados al `Docker Host`. En otras ocasiones el contenedor sólo necesita `read access`. Debemos recordar que múltiples contenedores pueden montar eñ mismo `volume`, y puede ser `read-write` para algunos y `read-only` para otros, al mismo tiempo.
 
 ```bash
 # mount
@@ -186,21 +185,22 @@ $ docker inspect nginxtest
 
 ## Backup, restore, or migrate data volumes
 
-Volumes are useful for backups, restores, and migrations. Use the `--volumes-from` flag to create a new container that mounts that volume.
 
-This open an interesting door to us, because we can specify a path on host where we can place some files, so when the container starts and the volume is initialized, the container is goig to have those files
+Los `volume` son útiles para `backups`, `restore` y migraciones. Usamos el flag `--volumes-from` para crear un nuevo contenedor que monte ese volumen.
+
+Esto abre una puerta interesante, porque podemos especificar un `path` en el `host` donde podemos poner algunos ficheros, así cuando el contenedor arrancque y el `volume` es inicializado, el contenedor va a tener esos ficheros.
 
 ## Use bind mounts
 
-Bind mounts have limited functionality compared to volumes.
+`Bind mounts` tiene una funcionalidad limitada comparada con los `volume`.
 
-When you use a __bind mount__, a __file or directory on the host machine is mounted into a container__. The file or directory is referenced by its __absolute path on the host machine__. By contrast, when you use a volume, a new directory is created within Docker’s storage directory on the host machine, and Docker manages that directory’s contents.
+Cuando usamos __bind mount__, un __fichero o directorio del host es montado en el contenedor__. El fichero o directorio es referenciado por su __path absoluto en la máquina host__. Por otro lado, cuando usas un `volume`, un nuevo directorio es creado dentro del directorio de almacenamiento de Docker en la máquina host, y Docker gestiona el contenido del directorio.
 
-The file or directory does not need to exist on the Docker host already. It is created on demand if it does not yet exist. Bind mounts are very performant, but they rely on the host machine’s filesystem having a specific directory structure available. If you are developing new Docker applications, consider using `named volumes` instead. You can’t use Docker CLI commands to directly manage bind mounts.
+El fichero o directorio no necesiat existir en el `Docker host`. Es creado bajo demanda si todavía no existe. `Bind mounts` tienen muy buena `performance`, pero se asientan el `host filesystem` teniendo una etructura de directorios específica. Si estamos generando nuevas aplicaciones con Docker, consideremos usar `named volumes` en su lugar. No se pueden usar comandos de Docker CLI para gestionar `bind mounst`.
 
 ### Choose the -v or --mount flag
 
-We have the same options as `volumes`
+Tenemos las mismas opciones que con `volumes`
 
 ### Differences between -v and --mount behavior
 
@@ -212,10 +212,11 @@ If you use `--mount` to bind-mount a file or directory that _does not yet exist 
 
 ## Use tmpfs mounts
 
-`Volumes` and `bind mounts` let you share files between the host machine and container so that you can persist data even after the container is stopped.
+Los `volume` y `bind mounts` permite compartir ficheros entre el `host` y el contenedor para así persistir el `data` incluso cuando el contenedor es parado.
 
-If you’re running Docker on Linux, you have a third option: `tmpfs` mounts. When you create a container with a `tmpfs` mount, the container can create files outside the container’s writable layer.
+Si corremos Docker en Linux, tenemos una tercera opción: `tmpfs` mounts. Cuando creamos un contenedor con `tmpfs` mount, el contenedor puede crear ficheros fuera de la capa de escritura del mismo.
 
-As opposed to volumes and bind mounts, a `tmpfs` mount is temporary, and only persisted in the host memory. When the container stops, the `tmpfs` mount is removed, and files written there won’t be persisted.
+Al contrario que los `volume` y `bind mounts`, un `tmpfs` mount es temporal, y sólo persiste en el host en memoria. Cuando el contenedor para, el `tmpfs` mount es eliminado, y los ficheros escritos no serán persistidos.
 
-This is useful to temporarily store sensitive files that you don’t want to persist in either the host or the container writable layer.
+
+Esto es útil para almacenar temporalmente almacenar ficheros con `sensitive data` que no se quieran persistir ni en el host o en la capa de escritura del contenedor.

@@ -20,7 +20,7 @@ $ docker run -p 8080:8080 myapp
 
 Estamos realizando mapeo de puertos con el flag *-p*.
 
-Podemos ejecutar los contenedores en un mod interactivo, `stdin`, `stdout` y `stderr` son redirigidos al `host`.
+Podemos ejecutar los contenedores en un modo interactivo, `stdin`, `stdout` y `stderr` son redirigidos al `host`.
 
 ```bash
 $ docker run -it fedora bash
@@ -34,6 +34,8 @@ $ docker run -it fedora python3
 >>> import os
 >>> os.system("cat /etc/*-release")
 ```
+
+> Para selir del terminal de Python: `ctrl + D` 
 
 Podemos, ejecutar nuestros contenedores en modo `detach`
 

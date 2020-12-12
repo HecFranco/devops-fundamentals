@@ -4,7 +4,7 @@
 
 ## Docker Hub
 
-El Docker registry por defecto. Para ejecutar un contenedor, necesiatmos una imagen, Docker Hub expone imágenes públicas las cuales utilizaremos para crear nuestras propias imágenes.
+El Docker registry por defecto. Para ejecutar un contenedor, necesiatmos una imagen, Docker Hub expone imágenes públicas, las cuales utilizaremos para crear nuestras propias imágenes.
 
 ### Docker Pull
 
@@ -213,7 +213,7 @@ ENTRYPOINT python3 /opt/app/main.py
 
 * Sólo puede haber una instrucción `CMD` por `Dockerfile`. Si hay más de un `CMD`, sólo el último tomará efecto.
 
-> La _exec form_  es parsead acom un array JSON, lo que signifcia que debemos usar `"` en vez `'`.
+> La _exec form_  es parseada como un array JSON, lo que signifcia que debemos usar `"` en vez `'`.
 
 ```Dockerfile
 ...

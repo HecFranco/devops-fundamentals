@@ -22,7 +22,7 @@ CMD echo "Hello World"
 ENTRYPOINT echo "Hello World"
 ```
 
-Cuado construimos el contenedor, por cada una de las instrucciones anteriores se añade una nueva capa, las dos últimas capas se _ejecutarán_ cuando arranquemos el contenedor, llamando a shell form `/bin/sh -c <command>` 
+Cuando construimos el contenedor, por cada una de las instrucciones anteriores se añade una nueva capa, las dos últimas capas se _ejecutarán_ cuando arranquemos el contenedor, llamando a shell form `/bin/sh -c <command>` 
 
 Construimos la imagen anterior
 
@@ -225,7 +225,7 @@ Simplemente ignora cualquier CMD o comando de linea.
 
 * `RUN` se utiliza para construir imágenes
 * Es preferible usar `ENTRYPOINT` a `CMD` cuando construimos imágenes ejecutables con Docker y siempre se necesita un comando para ser ejecutado. De manera adicional usamos `CMD` si necesitamos proveer argumentos extras por defecto que puedan ser sobreescritos desde la línea de comados cuando los contenedores se ejecutan.
-* Elegimos `CMD` si necesitas proveer un comandopor defecto y/o argumentos que puedenser sobreescritos desde la línea de comandos cuando se ejecuta el contenedor.
+* Elegimos `CMD` si necesitas proveer un comando por defecto y/o argumentos que puedenser sobreescritos desde la línea de comandos cuando se ejecuta el contenedor.
 
 ## Referencias
 

@@ -6,7 +6,7 @@ Docker es una plataforma para desarrolladores y administradores de sistema para 
 
 ## Introducción a los Contenedores
 
-Aunque parezca increible, los contenedores y sus precusores llevan por aquí más de 15 aaños, en los sistemas operativos de Linux y Unix. Desde comienzos del 2000, ha habido intentos para encapsular la tecnología de contenedores para el usuario final:
+Aunque parezca increible, los contenedores y sus precusores llevan por aquí más de 15 años, en los sistemas operativos de Linux y Unix. Desde comienzos del 2000, ha habido intentos para encapsular la tecnología de contenedores para el usuario final:
 
 * FreeBSD
 * Linux
@@ -15,7 +15,7 @@ Aunque parezca increible, los contenedores y sus precusores llevan por aquí má
 * Warden
 * Docker
 
-En el año 2013 es cuando Docker da un vuelco en el mercado haciendo que los contenedores sean una adopción masiva, el secreto, hacer fácil el uso de contenedores para el usuario final. A día de hoy los contenedores ejecutan cualquier tipo de aplicación que nos podamos imaginar:
+En el año 2013, es cuando Docker da un vuelco en el mercado haciendo que los contenedores sean una adopción masiva, el secreto, hacer fácil el uso de contenedores para el usuario final. A día de hoy los contenedores ejecutan cualquier tipo de aplicación que nos podamos imaginar:
 
 * IoT
 * Banking workloads
@@ -69,7 +69,7 @@ Si los `cgroups` limitan cuanto puedes usar de algo, los `namespaces` limitan cu
 
 ![Composicion de un contenedor](container-composition.png)
 
-* En el caso de Dockerlos siguientes `namespaces` son usados:
+* En el caso de Docker los siguientes `namespaces` son usados:
     - _pid_: Provides process isolation via an independent set of process IDs from other namespaces. These are nested.
     - _net_: Manages network interfaces by virtualizing the network stack through providing a loopback interface, and can create physical and virtual network interfaces that exist in a single namespace at a time.
     - _ipc_: Manages access to interprocess communication.
@@ -89,7 +89,7 @@ Los `union filesystems` son otra ventaja clara de usar contenedores de Docker. L
 * Device mapper at the block level
 * BTRFS and ZFS and the filesystem level
 
-La manera más sencilla de comprender los `unionn filessytems` es pensar en ellos como en capas de una tarta, con cada capa cocinada de manera independiente. El `linux kernel`es nuestra capa base; luego puede haber un sistema operativo como RedHat o Ubuntu.
+La manera más sencilla de comprender los `unionn filessytems` es pensar en ellos como en capas de una tarta, con cada capa cocinada de manera independiente. El `linux kernel` es nuestra capa base; luego puede haber un sistema operativo como RedHat o Ubuntu.
 
 Después podemos añadir una aplicación como `nginx` o `Apache`. Cada cambio genera una capa nueva. Finalmente, a medida que vas añadiendo cambios y nuevas capas son añadidas, siempre tienes un última capa, que es la capa sobre la que se puede escribir. `Union filesystems` proveen esta estrategia para hacer cada capa ligera y veloz.
 
@@ -134,7 +134,7 @@ Tres actores principales, `client`, `docker_host` y `registry`. El cliente se co
 
 ## Docker CLI
 
-Docker tiene un `command line client` el cuál será nuestar interaz desde la creación de imágenes a la ejecución de contenedores.
+Docker tiene un `command line client` el cuál será nuestra interaz desde la creación de imágenes a la ejecución de contenedores.
 
 ```bash
 $ docker help
