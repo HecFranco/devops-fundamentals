@@ -106,6 +106,16 @@ _./package.json_
   },
 ```
 
+- Fix app:
+
+_averageService.ts_
+
+```diff
+...
+- const a: number = "this is a string"
+
+```
+
 - If you want to give a try to the dev build just run
 
 ```bash
@@ -116,16 +126,6 @@ npm run build:dev
 
 ```bash
 npm run build:prod
-```
-
-- Fix app:
-
-_averageService.ts_
-
-```diff
-...
-- const a: number = "this is a string"
-
 ```
 
 - Another important change is to use [mini-css-extract-plugin in production](https://webpack.js.org/plugins/mini-css-extract-plugin/#common-use-case) because we can use style-loader in dev mode which it's faster:
@@ -304,7 +304,7 @@ _webpack.common.js_
   output: {
 -   filename: "[name].[chunkhash].js",
     path: path.resolve(process.cwd(), "dist"),
-    publicPath: "./",
+    publicPath: "/",
   },
 ...
 

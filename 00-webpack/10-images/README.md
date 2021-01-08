@@ -183,9 +183,11 @@ _webpack.config.js_
   output: {
     filename: "[name].[chunkhash].js",
     path: path.resolve(process.cwd(), "dist"),
-+   publicPath: "./",
++   publicPath: "/",
   },
 ```
+
+> IMPORTANT: Try `publicPath: "./",` if you have some errors
 
 - And remember that the webpack `context` is over `./src` so:
 

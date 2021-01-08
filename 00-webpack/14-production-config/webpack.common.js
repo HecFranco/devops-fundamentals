@@ -16,7 +16,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(process.cwd(), "dist"),
-    publicPath: "./",
+    publicPath: "/",
   },
   module: {
     rules: [
