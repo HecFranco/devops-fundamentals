@@ -93,6 +93,8 @@ $ docker start myapp
 $ docker restart myapp
 ```
 
+> https://stackoverflow.com/questions/40372321/whats-the-difference-between-docker-start-and-docker-restart#:~:text=The%20docker%20restart%20command%20will,more%20robust%20in%20this%20situation.
+
 ### Eliminar contenedores
 
 ```bash

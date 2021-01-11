@@ -103,7 +103,7 @@ $ docker network inspect none
 
 ### User-Defined Networks
 
-Siempre podemos crear nuetsras propiedades redes.
+Siempre podemos crear nuestras propias redes.
 
 ```bash
 $ docker network create --driver=bridge \

@@ -13,7 +13,7 @@ Jaimes-MacBook-Pro:~ jaimesalaszancada$ pwd
 /Users/jaimesalaszancada
 ```
 
-__pwd__ nos muestar por panatalla el `path` absoluto de nuestro directorio de trabajo, podemos cambiar nuestro directorio de trabajo utilizando __cd__. Una vez que nos movemos por los distintos directorios queremos ver el contenido de los mismos:
+__pwd__ nos muestra por panatalla el `path` absoluto de nuestro directorio de trabajo, podemos cambiar nuestro directorio de trabajo utilizando __cd__. Una vez que nos movemos por los distintos directorios queremos ver el contenido de los mismos:
 
 * __ls__ nost permite listar los distintos ficheros y directorios del directorio en el que nos encontarmos. 
 * __ls -l__ con el `flag` **-l** nos da información acerca del contenido.
@@ -83,10 +83,6 @@ yarn-error.log*
 
 ```
 
-__less__ gives us some tools, while we're in it, to navigate the file. __Shift G__ will jump us to the very end and __g__ will take us back to the top. Another thing we can do with less is we can search in the file easily.
-
-If you're at the top, you can do __/__. Let's say we want to see how many times _yarn_ is used. We enter, it jumps and highlights each of these matches. To exit it, we do Q, and that takes us back to our normal bash screen.
-
 __less__ nos da algunas herramientas, mientras estamos dentro de su contexto, para navegar dentro del fichero. __Shift G__ nos lleva al final del fichero y __g__ nos devuelve al principio. Otra de las cosas es hacer `high light` de contenido dentro del fichero.
 
 Si estamos al comienzo del fichero podemos hacer __/yarn__ y resaltara ese termino. Para salir __q__.
@@ -99,9 +95,7 @@ Si estamos al comienzo del fichero podemos hacer __/yarn__ y resaltara ese termi
 Jaimes-MacBook-Pro:work jaimesalaszancada$ touch file.txt
 ```
 
-At this point, the file.txt is going to be empty though, it initializes an empty file. Let's see how we would add content to it. For that, we'll use the echo command. __echo__ is sort of like the console.log of Bash. If we do __echo hi__ it logs out my string there.
-
-En este punto, `file.txt` estará vacío. Vamos a ver como podemos añadir contenido al mismo. Para esto vamos a usar el comando __echo__, este comando es una especi de `logger` en el terminal.
+En este punto, `file.txt` estará vacío. Vamos a ver como podemos añadir contenido al mismo. Para esto vamos a usar el comando __echo__, este comando es una especie de `logger` en el terminal de Bash. Si hacemos __echo hi__ escupe la string.
 
 ```bash
 $ echo hi
@@ -138,7 +132,7 @@ hi again
 hello world
 ```
 
-Si lo que queremo es inicializar un fichero y añadir contenido de manera inmediata
+Si lo que queremos es inicializar un fichero y añadir contenido de manera inmediata
 
 ```bash
 Jaimes-MacBook-Pro:work jaimesalaszancada$ echo 'hello' > file2.txt

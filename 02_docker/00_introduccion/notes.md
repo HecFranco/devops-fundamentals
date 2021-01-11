@@ -6,7 +6,7 @@ Docker es una plataforma para desarrolladores y administradores de sistema para 
 
 ## Introducción a los Contenedores
 
-Aunque parezca increible, los contenedores y sus precusores llevan por aquí más de 15 años, en los sistemas operativos de Linux y Unix. Desde comienzos del 2000, ha habido intentos para encapsular la tecnología de contenedores para el usuario final:
+Aunque parezca increible, los contenedores y sus precursores llevan por aquí más de 15 años, en los sistemas operativos de Linux y Unix. Desde comienzos del 2000, ha habido intentos para encapsular la tecnología de contenedores para el usuario final:
 
 * FreeBSD
 * Linux
@@ -15,7 +15,7 @@ Aunque parezca increible, los contenedores y sus precusores llevan por aquí má
 * Warden
 * Docker
 
-En el año 2013, es cuando Docker da un vuelco en el mercado haciendo que los contenedores sean una adopción masiva, el secreto, hacer fácil el uso de contenedores para el usuario final. A día de hoy los contenedores ejecutan cualquier tipo de aplicación que nos podamos imaginar:
+En el año 2013, es cuando Docker da un vuelco al mercado haciendo que los contenedores sean adoptados de manera masiva, el secreto, hacer fácil el uso de contenedores para el usuario final. A día de hoy los contenedores ejecutan cualquier tipo de aplicación que nos podamos imaginar:
 
 * IoT
 * Banking workloads
@@ -25,11 +25,11 @@ En el año 2013, es cuando Docker da un vuelco en el mercado haciendo que los co
 
 ## ¿Qué es un contenedor?
 
-La encapsulación del paradigma del conetenedor que realiza Docker representa una implementación moderna del aislamiento de recursos que utiliza características del Kernel de Linux, tales como chroot, **control groups (cgroups)**, UninonFS y namespaces para aislar completamente el control del recurso a nivel de proceso.
+La encapsulación, del paradigma del conetenedor, que realiza Docker representa una implementación moderna del aislamiento de recursos que utiliza características del Kernel de Linux, tales como chroot, **control groups (cgroups)**, UninonFS y namespaces para aislar completamente el control del recurso a nivel de proceso.
 
-Los contenedores usan las tecnologías anteriormente citadas para crear imágenes ligeras que actúan de manera independiente, encapsualndo completamente un trozo de software que lleva todo lo que necesita dentro de su propia caja. Esto puede incluir los binarios de una aplicación, cualquier herramienta del sistema o librerías, configuración basada en el entorno de ejecución, y las intrucciones necesarias para su ejecución. 
+Los contenedores usan las tecnologías anteriormente citadas para crear imágenes ligeras, que actúan de manera independiente, encapsualndo completamente un trozo de software que lleva todo lo que necesita dentro de su propia caja. Esto puede incluir los binarios de una aplicación, cualquier herramienta del sistema o librerías, configuración basada en el entorno de ejecución, y las intrucciones necesarias para su ejecución. 
 
-Esta propiedad tan importante que es el aislamiento, permite a los desarrolladores y operadores, liberar la naturaleza de todo en uno de los contenedores para ejecutar sin problemas, sin importar el entorno en el que se están ejecutando. Esto incluye desde mi máquina hasta cualquier servidor de producción.
+Esta propiedad tan importante, que es el aislamiento, permite a los desarrolladores y operadores, liberar la naturaleza de todo en uno de los contenedores para ejecutar sin problemas, sin importar el entorno en el que se están ejecutando. Esto incluye desde mi máquina hasta cualquier servidor de producción.
 
 Este desacoplamineto de empaquetado de aplicaión del entorno en el cuál se va a ejecutar es un concepto poderoso que provee una clara separación de responsabilidades. Permite a los desarrolladores centrarse en construir la aplicación del código y gestionar sus propias dependencias, mientras que los operadores pueden delimitar la integración continua, y despliegue sin tenerse que preocupar  por su configuración.
 
@@ -40,7 +40,7 @@ Este desacoplamineto de empaquetado de aplicaión del entorno en el cuál se va 
 
 ### cgroups
 
-Los `cgroups` trabajan permitiendo al `host` compartir y limitar los recursos a cada proceso o contenedor que puedan consumir. Muchos contenedores pueden compartir CPU y memoria mientras que se mantengan en las restricciones predefinidas. Los `cgroups` permiten a los contenedores provisionar acceso a memoria, acceso a disco I/O, red, y CPU. Se puede incluse acceder a dispostivos. 
+Los `cgroups` trabajan permitiendo al `host` compartir y limitar los recursos a cada proceso o contenedor que puedan consumir. Muchos contenedores pueden compartir CPU y memoria mientras que se mantengan en las restricciones predefinidas. Los `cgroups` permiten a los contenedores provisionar acceso a memoria, acceso a disco I/O, red, y CPU. Se puede incluso acceder a dispostivos. 
 
 * Los `cgroups` más relevantes:
     - **Memory cgroup**: This keeps track of page access by the group, and can define limits for physical, kernel, and total memory.
@@ -63,7 +63,7 @@ Los `namespaces` ofrecen una nueva forma de aislamiento para al interacción del
 
 > *unshare()* allows a process (or thread) to disassociate parts of its execution context that are currently being shared with other processes (or threads). Part of the execution context, such as the mount namespace, is shared implicitly when a new process is created using FORK(2) (for more information visit http://man7.org/linux/man-pages/man2/fork.2.html) or VFORK(2) (for more information visit http://man7.org/linux/man-pages/man2/vfork.2.html), while other parts, such as virtual memory, may be shared by explicit request when creating a process or thread using CLONE(2) (for more information visit http://man7.org/linux/man-pages/man2/clone.2.html).
 
-Los `namespaces` limitan la visibilidad que un proceso tiene en otros procesos, `networking`, `filesystems`, y componentes del `user ID`. Los procesos de contenedores están limitados para ver sólo lo que está en el mismo `namespace`. Los procesos desde los contenedores o los procesos del `host` no son directamente accesibles desde dentro de los procesos del contenedor. Adicionalmente Docker, proporciona a cada contenedor su propia `networking` que protege a los los `sockets` y las `interfaces` de una manera similar.
+Los `namespaces` limitan la visibilidad que un proceso tiene en otros procesos, `networking`, `filesystems`, y componentes del `user ID`. Los procesos de contenedores están limitados para ver sólo lo que está en el mismo `namespace`. Los procesos desde los contenedores o los procesos del `host` no son directamente accesibles desde dentro de los procesos del contenedor. Adicionalmente Docker, proporciona a cada contenedor su propia `networking` que protege a los `sockets` y las `interfaces` de una manera similar.
 
 Si los `cgroups` limitan cuanto puedes usar de algo, los `namespaces` limitan cuanto puedes ver de algo.
 
@@ -79,7 +79,7 @@ Si los `cgroups` limitan cuanto puedes usar de algo, los `namespaces` limitan cu
 
 ### Union filesystems
 
-Los `union filesystems` son otra ventaja clara de usar contenedores de Docker. Los contenedores corren desde una imagen, está representa un punto en el tiempo. Las imágenes de los contenedores realizan un `snapshot` del `filesystem`, pero tienden a ser mucho más pequeño que el de una `VM`. El contenedor comparte el `kernel host` y generalmente ejecuta un conjunto mucho menor de procesos, así que el `filesystem` y el período de `bootstrap` tiende a ser mucho menor. Segundo, la `union filesystem` permite un almacenimiento eficiente, descarga, y jecuciñon de estas imágenes. Los contenedores usan la idea de _copy-on-write storage_, que es capaz de crear otro contenedor inmediatamente, sin tener que esperar a copiar todo el `filesystem`
+Los `union filesystems` son otra ventaja clara de usar contenedores de Docker. Los contenedores corren desde una imagen, está representa un punto en el tiempo. Las imágenes de los contenedores realizan un `snapshot` del `filesystem`, pero tienden a ser mucho más pequeño que el de una `VM`. El contenedor comparte el `kernel host` y generalmente ejecuta un conjunto mucho menor de procesos, así que el `filesystem` y el período de `bootstrap` tiende a ser mucho menor. Segundo, la `union filesystem` permite un almacenimiento eficiente, descarga, y ejecución de estas imágenes. Los contenedores usan la idea de _copy-on-write storage_, que es capaz de crear otro contenedor inmediatamente, sin tener que esperar a copiar todo el `filesystem`
 
 ![copy-on-write](copy-on-write.png)
 
@@ -89,7 +89,7 @@ Los `union filesystems` son otra ventaja clara de usar contenedores de Docker. L
 * Device mapper at the block level
 * BTRFS and ZFS and the filesystem level
 
-La manera más sencilla de comprender los `unionn filessytems` es pensar en ellos como en capas de una tarta, con cada capa cocinada de manera independiente. El `linux kernel` es nuestra capa base; luego puede haber un sistema operativo como RedHat o Ubuntu.
+La manera más sencilla de comprender los `union filesytems` es pensar en ellos como en capas de una tarta, con cada capa cocinada de manera independiente. El `linux kernel` es nuestra capa base; luego puede haber un sistema operativo como RedHat o Ubuntu.
 
 Después podemos añadir una aplicación como `nginx` o `Apache`. Cada cambio genera una capa nueva. Finalmente, a medida que vas añadiendo cambios y nuevas capas son añadidas, siempre tienes un última capa, que es la capa sobre la que se puede escribir. `Union filesystems` proveen esta estrategia para hacer cada capa ligera y veloz.
 
@@ -101,16 +101,15 @@ Lo que hace esto realmente eficiente es que Docker cachea las capas la primera v
 
 ## Containers Summary
 
-Containers are logical packaging mechanisms in which applications are executed isolated (file, network and memory) from the rest using features provided by Linux Kernel:
+Los contenedores son un mecanismo de empaquetado lógico, en los cuales las aplicaciones son ejecutadas de forma aislada (ficheros, network y memoria) del resto usando características provistas por el Kernel de Linux: 
 
-* __namespaces__: They limit the resources of the linux kernel that are seen by a process.
-* __cgroups__: They control the resources assigned to a process.
-* __Union filesystems__: Sharable independent layers.
+* __namespaces__: Limitan los recursos del kernel de Linux que son vistos por un proceso.
+* __cgroups__: Controlan los recursos asignados a un proceso.
+* __Union filesystems__: Capas independientes que se pueden compartir.
 
 ## Container vs Virtual Machine
 
 > ¿Cuál es la principal diferencia entre contenedores y VM? Kernel
-
 
 ## Container Run-Times
 

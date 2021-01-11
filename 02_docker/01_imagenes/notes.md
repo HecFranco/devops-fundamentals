@@ -4,7 +4,7 @@
 
 ## Docker Hub
 
-El Docker registry por defecto. Para ejecutar un contenedor, necesiatmos una imagen, Docker Hub expone imágenes públicas, las cuales utilizaremos para crear nuestras propias imágenes.
+El Docker registry por defecto. Para ejecutar un contenedor, necesitamos una imagen, Docker Hub expone imágenes públicas, las cuales utilizaremos para crear nuestras propias imágenes.
 
 ### Docker Pull
 
@@ -24,7 +24,7 @@ $ docker images
 $ docker image ls
 ```
 
-Listamos las imágenes que tenemos en nuestro loccal.
+Listamos las imágenes que tenemos en nuestro local.
 
 ### Dockerfile
 
@@ -60,7 +60,7 @@ CMD [ "python3", "server.py" ]
 
 ### FROM
 
-* `FROM` inicializa un nuevo escenario de `build` y estable la `Base Image` para las siguientes instrucciones. Un `Dockerfile` para que sea válido debe _comenzar_ con la instrucción `FROM`, sólo pudiendo ser precedida por `ARG`.
+* `FROM` inicializa un nuevo escenario de `build` y establece la `Base Image` para las siguientes instrucciones. Un `Dockerfile` para que sea válido debe _comenzar_ con la instrucción `FROM`, sólo pudiendo ser precedida por `ARG`.
 
 * `FROM` puede aparecer múltiples veces dentro de un mismo `Dockerfile`, para crear múltiples imágenes o usar un `build stage` como dependencia de otro. Cada `FROM` limpia cualquier estado creado previo.
 
@@ -136,8 +136,7 @@ ADD https://github.com/coder/repo/mix.exs .
 
 [ENV reference](https://docs.docker.com/engine/reference/builder/#env)
 
-`ENV` establece la varable de entrada como par valor. Este valor estará en el entorno para todas las siguientes instrucciones en el `build stage`.
-
+`ENV` establece la variable de entrada como par valor. Este valor estará en el entorno para todas las siguientes instrucciones en el `build stage`.
 
 ```Dockerfile
 ...
@@ -247,7 +246,7 @@ Ambas `CMD` y `ENTRYPOINT` definen que comandos se ejecutan cuando ejecutamos un
 | CMD ["p1_cmd", "p2_cmd"]   |        p1_cmd p2_cmd       | /bin/sh -c exec_entry p1_entry |        exec_entry p1_entry p1_cmd p2_cmd       |
 |     CMD exec_cmd p1_cmd    | /bin/sh -c exec_cmd p1_cmd | /bin/sh -c exec_entry p1_entry | exec_entry p1_entry /bin/sh -c exec_cmd p1_cmd |
 
-> NOTA: Si _CMD_ está definido desde la imagen base, establecer _ENTRYPOINT_ reseteará _CMD_ a un valor vacío. En este escenario, _CMD_ debe de ser definido en la imagen actula para tener un valor.
+> NOTA: Si _CMD_ está definido desde la imagen base, establecer _ENTRYPOINT_ reseteará _CMD_ a un valor vacío. En este escenario, _CMD_ debe de ser definido en la imagen actual para tener un valor.
 
 [Demo 00 Understanding RUN CMD and ENTRYPOINT]('02_docker/01_images/00_understanding_run_cmd_entrypoint/readme.md')
 
