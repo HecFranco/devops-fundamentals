@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  frontend:
+    build:
+      context: ./frontend/.
+      dockerfile: Dockerfile
+    image: lemoncode-challange-frontend
+    container_name: lemoncode-frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - lemoncode-challange
+  backend:
+    build:
+      context: ./backend/.
+      dockerfile: Dockerfile
+    image: lemoncode-challange-backend
+    container_name: lemoncode-backend
+    ports:
+      - "5000:5000"
+    networks:
+      - lemoncode-challange
+  database:
+    build:
+      context: ./docker/mongodb/.
+      dockerfile: Dockerfile
+    image: lemoncode-challange-database
+    container_name: lemoncode-database
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - MONGO_USERNAME=$MONGO_USERNAME
+      - MONGO_PASSWORD=$MONGO_PASSWORD
+      - MONGO_HOSTNAME=db
+      - MONGO_PORT=$MONGO_PORT
+      - MONGO_DB=$MONGO_DB
+    #ports:
+    #  - "27017:27017"
+    volumes:
+      - database:/data/db
+    networks:
+      - lemoncode-challange
+networks:
+  lemoncode-challange:
+    # use the bridge driver, but enable IPv6
+    driver: bridge
+    name: lemoncode-challange 
+volumes:
+  database:
